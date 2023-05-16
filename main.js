@@ -96,6 +96,7 @@ function developModel(){
             },{
                 type: 'line',
                 data: y_hat,
+                label: '',
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)'
             },
