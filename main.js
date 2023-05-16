@@ -52,7 +52,33 @@ function developModel(){
       var intercept = y_mean - x_mean*slope;
       regressor['intercept'] = intercept;
   
-      
+      for(let j=1; j<=x_values.length; j++){
+        let actual = (slope*x_values[j-1]) + intercept;
+        //console.log(j + ". actual: " + actual);
+
+        let errorRate = ((y_values[j-1]-actual) / y_values[j-1])*100;
+        //console.log(j + ". errorRate: " + errorRate + "%");
+
+        let trow = document.createElement("tr");
+        let td0 = document.createElement('td');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+
+        td0.innerHTML = j;
+        td1.innerHTML = y_values[j-1];
+        td2.innerHTML = actual;
+        td3.innerHTML = errorRate;
+
+        trow.appendChild(td0);
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+
+        tableData.appendChild(trow);
+        
+      }
+
       //Get y_hat, or predicted values of y based on x_values
       //Loop through x_values, and run the elements through the lr equation to get predictions
       var y_hat = [];
@@ -82,6 +108,9 @@ function developModel(){
   }
   
   
+  
+
+
   function plotRegressionChart(x_values, y_values, y_hat, r2){
       ctx = document.getElementById('regressionChart');
       mixedChart = new Chart(ctx, {
@@ -96,7 +125,7 @@ function developModel(){
             },{
                 type: 'line',
                 data: y_hat,
-                label: '',
+                label:'',
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)'
             },

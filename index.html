@@ -39,6 +39,16 @@
 		<h6 id="regressionEquation" style="margin-top: 20px; margin-bottom: 8px; display: none;"> </h6>
 		<canvas id="regressionChart" style="display: none;"></canvas>
 
+        <table>
+            <thead>
+                <td>#</td>
+                <td>V1: (D/t1)</td>
+                <td>V2: [F(x) = mX + c]</td>
+                <td>Error%: [(V1-V2)/V1] x 100</td>
+            </thead>
+            <tbody id="tableData"></tbody>
+        </table>
+
 	</div>
 
     <script src="main.js"></script>
