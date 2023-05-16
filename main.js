@@ -88,16 +88,22 @@ function developModel(){
         
         data: {
             datasets: [{
-                type: 'line',
+                type: 'scatter',
                 label: 'Line of Best Fit (Coefficient of Determination: '+String(r2)+')',
                 data: y_hat,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)'
-            }, {
+            },{
+                type: 'line',
+                data: y_hat,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            },
+            {
                 type: 'scatter',
                 label: 'True Values',
                 data: y_values,
-                 backgroundColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(0, 0, 0)',
             }],
             labels: x_values
         },
@@ -127,7 +133,14 @@ function developModel(){
                   color: '#3f7897',
                   font: {weight: 'bold',size:16},
                   padding: 10,
-                }
+                },
+                min: 0,
+                
+                ticks: {
+                    beginAtZero: true,
+                    stepSize:10
+                },
+                beginAtZero: true,
               },
               y: {
                 title: {
@@ -136,7 +149,13 @@ function developModel(){
                   color: '#3f7897',
                   font: {weight: 'bold',size:16},
                   padding: 14,
+                  
+
                 },
+                min: 0,
+                ticks: {
+                    beginAtZero: true
+                }
                 
               }
             },
