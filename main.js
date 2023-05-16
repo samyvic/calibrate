@@ -4,6 +4,8 @@ function developModel(){
     
     document.getElementById('regressionEquation').style.display = "block";
     document.getElementById('regressionChart').style.display = "block";
+    document.getElementById('table').style.display = "table";
+    document.getElementById('cards').style.display = "flex";
     //init canvas
     if(mixedChart != null){
         mixedChart.destroy();
@@ -51,34 +53,69 @@ function developModel(){
       //Equation to solve for intercept
       var intercept = y_mean - x_mean*slope;
       regressor['intercept'] = intercept;
-  
+      
+      let badCount = 0;
+      let validCount = 0;
+
       for(let j=1; j<=x_values.length; j++){
         let actual = (slope*x_values[j-1]) + intercept;
         //console.log(j + ". actual: " + actual);
 
         let errorRate = ((y_values[j-1]-actual) / y_values[j-1])*100;
+        errorRate = Math.round((errorRate + Number.EPSILON) * 100) / 100
         //console.log(j + ". errorRate: " + errorRate + "%");
-
+        
         let trow = document.createElement("tr");
         let td0 = document.createElement('td');
         let td1 = document.createElement('td');
         let td2 = document.createElement('td');
         let td3 = document.createElement('td');
-
+        let td4 = document.createElement('td');
         td0.innerHTML = j;
         td1.innerHTML = y_values[j-1];
         td2.innerHTML = actual;
         td3.innerHTML = errorRate;
+        
+        
 
+        if(actual > 0.3){
+            if(Math.abs(errorRate) <= 0.5){
+                td4.innerHTML = "Valid";
+                td4.style.color = "green";
+                validCount++;
+            }else{
+                td4.innerHTML = "Bad: beyond &#177; 0.5%";
+                td4.style.color = "red";
+                badCount++;
+            }
+        }else{
+            if(Math.abs(errorRate) <= 1){
+                td4.innerHTML = "Valid";
+                td4.style.color = "green";
+                validCount++;
+            }else{
+                td4.innerHTML = "Bad: beyond &#177; 1%";
+                td4.style.color = "red";
+                badCount++;
+            }
+        }
+        
+        
         trow.appendChild(td0);
         trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
-
+        trow.appendChild(td4);
+        
         tableData.appendChild(trow);
         
-      }
-
+    }
+    
+    let validSample = document.getElementById('validSample');
+    validSample.innerHTML = validCount;
+    let badSample = document.getElementById('badSample');
+    badSample.innerHTML = badCount;
+    
       //Get y_hat, or predicted values of y based on x_values
       //Loop through x_values, and run the elements through the lr equation to get predictions
       var y_hat = [];

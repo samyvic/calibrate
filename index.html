@@ -39,16 +39,26 @@
 		<h6 id="regressionEquation" style="margin-top: 20px; margin-bottom: 8px; display: none;"> </h6>
 		<canvas id="regressionChart" style="display: none;"></canvas>
 
-        <table>
+        <table id="table" style="display: none;">
             <thead>
                 <td>#</td>
                 <td>V1: (D/t1)</td>
                 <td>V2: [F(x) = mX + c]</td>
                 <td>Error%: [(V1-V2)/V1] x 100</td>
+                <td>Validation</td>
             </thead>
             <tbody id="tableData"></tbody>
         </table>
-
+        <div class="card-container" id="cards" style="display: none;">
+            <div class="card validCard">
+                <h6>Number of Valid Samples</h6>
+                <h1 id="validSample"></h1>
+            </div>
+            <div class="card badCard">
+                <h6>Number of Bad Samples</h6>
+                <h1 id="badSample"></h1>
+            </div>
+        </div>
 	</div>
 
     <script src="main.js"></script>
