@@ -11,8 +11,8 @@ function developModel(){
         mixedChart.destroy();
     }
     //Get input arrays
-    var x_values = document.getElementById('x_values').value.split(",").map(Number);
-    var y_values = document.getElementById('y_values').value.split(",").map(Number);
+    var x_values = document.getElementById('x_values').value.split(" ").map(Number);
+    var y_values = document.getElementById('y_values').value.split(" ").map(Number);
     
     //Get slope, intercept and R2 score
     var regressor = linearRegression(x_values, y_values);
@@ -144,9 +144,6 @@ function developModel(){
           
   }
   
-  
-  
-
 
   function plotRegressionChart(x_values, y_values, y_hat, r2){
       ctx = document.getElementById('regressionChart');
