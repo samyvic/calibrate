@@ -106,9 +106,9 @@ function developModel(){
         trow.appendChild(td2);
         trow.appendChild(td3);
         trow.appendChild(td4);
-        
-        tableData.appendChild(trow);
-        
+        if(tableData.rows.length < x_values.length){
+            tableData.appendChild(trow);
+        }
     }
     
     let validSample = document.getElementById('validSample');
